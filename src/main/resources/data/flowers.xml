@@ -2,14 +2,14 @@
 <flowers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.example.com/flowers flowers.xsd">
 
-    <flower id="1" name="chamomile">
+    <flower id="a1" name="chamomile" type-of-flower = "field">
         <soil>ground</soil>
         <origin>Altai</origin>
-        <visual-parametrs>
+        <visual-parameters>
             <steam-color>green</steam-color>
             <leaf-color>white</leaf-color>
             <size>0.2 m</size>
-        </visual-parametrs>
+        </visual-parameters>
         <multiplying>seeds</multiplying>
         <date-of-planting>2021-05-15</date-of-planting>
         <growing-tips>
@@ -18,14 +18,14 @@
             <watering>200 ml</watering>
         </growing-tips>
     </flower>
-    <tree id="2" name="eucalyptus" description="evergreen tree">
+    <tree id="a2" name="eucalyptus" max-age = "100">
         <soil>ground</soil>
         <origin>Australia</origin>
-        <visual-parametrs>
+        <visual-parameters>
             <steam-color>brown</steam-color>
             <leaf-color>green</leaf-color>
             <size>30 m</size>
-        </visual-parametrs>
+        </visual-parameters>
         <multiplying>cuttings</multiplying>
         <date-of-planting>2021-03-20</date-of-planting>
         <growing-tips>
@@ -34,14 +34,14 @@
             <watering>1000000 ml</watering>
         </growing-tips>
     </tree>
-    <bush id="3" name="jasmine">
+    <bush id="a3" name="jasmine" amount-of-trunks = "10">
         <soil>sod-podzolic</soil>
         <origin>Arabia</origin>
-        <visual-parametrs>
+        <visual-parameters>
             <steam-color>green</steam-color>
             <leaf-color>green</leaf-color>
             <size>3 m</size>
-        </visual-parametrs>
+        </visual-parameters>
         <multiplying>cuttings</multiplying>
         <date-of-planting>2021-10-01</date-of-planting>
         <growing-tips>

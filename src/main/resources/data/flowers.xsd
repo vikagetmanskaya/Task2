@@ -11,10 +11,22 @@
             </sequence>
         </complexType>
     </element>
-    <element name="plant" abstract="true"/>
-    <element name="tree" type="tns:Tree" substitutionGroup="tns:plant"/>
-    <element name="flower" type="tns:Flower" substitutionGroup="tns:plant"/>
-    <element name="bush" type="tns:Bush" substitutionGroup="tns:plant"/>
+    <element name="plant" abstract="true" type="tns:PlantType"/>
+    <element name="tree" type="tns:TreeType" substitutionGroup="tns:plant"/>
+    <element name="flower" type="tns:FlowerType" substitutionGroup="tns:plant"/>
+    <element name="bush" type="tns:BushType" substitutionGroup="tns:plant"/>
+    <complexType name="PlantType">
+        <sequence>
+            <element name="soil" type="tns:SoilType"/>
+            <element name="origin" type="string"/>
+            <element name="visual-parameters" type="tns:VisualParameters"/>
+            <element name="multiplying" type="tns:Multiplying"/>
+            <element name="date-of-planting" type="date"/>
+            <element name="growing-tips" type="tns:GrowingTips"/>
+        </sequence>
+        <attribute name="id" type="ID" use="required"/>
+        <attribute name="name" type="string" use="required"/>
+    </complexType>
     <simpleType name="SoilType">
         <restriction base="string">
             <enumeration value="podzolic"/>
@@ -69,48 +81,38 @@
             <pattern value="\d+\s ml"/>
         </restriction>
     </simpleType>
-    <complexType name="Tree">
+    <complexType name="TreeType">
 
-        <sequence>
-            <element name="soil" type="tns:SoilType"/>
-            <element name="origin" type="string"/>
-            <element name="visual-parameters" type="tns:VisualParameters"/>
-            <element name="multiplying" type="tns:Multiplying"/>
-            <element name="date-of-planting" type="date"/>
-            <element name="growing-tips" type="tns:GrowingTips"/>
-        </sequence>
-        <attribute name="id" type="ID" use="required"/>
-        <attribute name="name" type="string" use="required"/>
-        <attribute name="description" type="string" use="optional"/>
+        <complexContent>
+            <extension base="tns:PlantType">
+                <attribute name="max-age" type="int" use="optional"/>
+            </extension>
+        </complexContent>
     </complexType>
-    <complexType name="Flower">
+    <complexType name="FlowerType">
 
-        <sequence>
-            <element name="soil" type="tns:SoilType"/>
-            <element name="origin" type="string"/>
-            <element name="visual-parameters" type="tns:VisualParameters"/>
-            <element name="multiplying" type="tns:Multiplying"/>
-            <element name="date-of-planting" type="date"/>
-            <element name="growing-tips" type="tns:GrowingTips"/>
-        </sequence>
-        <attribute name="id" type="ID" use="required"/>
-        <attribute name="name" type="string" use="required"/>
-        <attribute name="description" type="string" use="optional"/>
+        <complexContent>
+            <extension base="tns:PlantType">
+                <attribute name="type-of-flower" use="optional">
+                        <simpleType>
+                            <restriction base="string">
+                                <enumeration value="field"/>
+                                <enumeration value="decorative"/>
+                            </restriction>
+                        </simpleType>
+                </attribute>
+
+            </extension>
+        </complexContent>
     </complexType>
 
-    <complexType name="Bush">
+    <complexType name="BushType">
 
-        <sequence>
-            <element name="soil" type="tns:SoilType"/>
-            <element name="origin" type="string"/>
-            <element name="visual-parameters" type="tns:VisualParameters"/>
-            <element name="multiplying" type="tns:Multiplying"/>
-            <element name="date-of-planting" type="date"/>
-            <element name="growing-tips" type="tns:GrowingTips"/>
-        </sequence>
-        <attribute name="id" type="ID" use="required"/>
-        <attribute name="name" type="string" use="required"/>
-        <attribute name="description" type="string" use="optional"/>
+        <complexContent>
+            <extension base="tns:PlantType">
+                <attribute name="amount-of-trunks" type="int" use="optional"/>
+            </extension>
+        </complexContent>
 
     </complexType>
 </schema>
