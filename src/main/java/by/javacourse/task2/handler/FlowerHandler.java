@@ -6,17 +6,19 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.time.LocalDate;
 import java.util.EnumSet;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class FlowerHandler extends DefaultHandler {
+    private static final String REPLACE_THIS = "-";
+    private static final String REPLACE_ON = "_";
     private Set<AbstractPlant> plants;
     private AbstractPlant current;
     private FlowerXmlTag currentXmlTag;
     private EnumSet<FlowerXmlTag> withText;
 
     public FlowerHandler() {
-        plants = new HashSet<AbstractPlant>();
+        plants = new LinkedHashSet<>();
         withText = EnumSet.range(FlowerXmlTag.SOIL, FlowerXmlTag.WATERING);
     }
 
@@ -26,31 +28,36 @@ public class FlowerHandler extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) {
-        if (FlowerXmlTag.FLOWER.getValue().equals(qName)) {
-            current = new Flower();
-            current.setName(attributes.getValue(0));
-            current.setId(attributes.getValue(1));
-            if (attributes.getLength() == 3) {
-                ((Flower) current).setType(FlowerType.valueOf(attributes.getValue(2)));
+        switch (FlowerXmlTag.valueOf(qName.toUpperCase().replace(REPLACE_THIS, REPLACE_ON))) {
+            case FLOWER -> {
+                current = new Flower();
+                current.setId(attributes.getValue(FlowerXmlTag.ID.getValue()));
+                current.setName(attributes.getValue(FlowerXmlTag.NAME.getValue()));
+                if (attributes.getLength() == 3) {
+                    ((Flower) current).setType(FlowerType.valueOf(attributes.getValue(FlowerXmlTag.TYPE_OF_FLOWER.getValue()).toUpperCase()));
+                }
             }
-        } else if (FlowerXmlTag.TREE.getValue().equals(qName)) {
-            current = new Tree();
-            current.setName(attributes.getValue(0));
-            current.setId(attributes.getValue(1));
-            if (attributes.getLength() == 3) {
-                ((Tree) current).setMaxAge(Integer.parseInt(attributes.getValue(2)));
+            case TREE -> {
+                current = new Tree();
+                current.setId(attributes.getValue(FlowerXmlTag.ID.getValue()));
+                current.setName(attributes.getValue(FlowerXmlTag.NAME.getValue()));
+                if (attributes.getLength() == 3) {
+                    ((Tree) current).setMaxAge(Integer.parseInt(attributes.getValue(FlowerXmlTag.MAX_AGE.getValue())));
+                }
             }
-        } else if (FlowerXmlTag.BUSH.getValue().equals(qName)) {
-            current = new Bush();
-            current.setName(attributes.getValue(0));
-            current.setId(attributes.getValue(1));
-            if (attributes.getLength() == 3) {
-                ((Bush) current).setAmountOfTrunks(Integer.parseInt(attributes.getValue(2)));
+            case BUSH -> {
+                current = new Bush();
+                current.setId(attributes.getValue(FlowerXmlTag.ID.getValue()));
+                current.setName(attributes.getValue(FlowerXmlTag.NAME.getValue()));
+                if (attributes.getLength() == 3) {
+                    ((Bush) current).setAmountOfTrunks(Integer.parseInt(attributes.getValue(FlowerXmlTag.AMOUNT_OF_TRUNKS.getValue())));
+                }
             }
-        } else {
-            FlowerXmlTag temp = FlowerXmlTag.valueOf(qName.toUpperCase().replace("-", "_"));
-            if (withText.contains(temp)) {
-                currentXmlTag = temp;
+            default -> {
+                FlowerXmlTag temp = FlowerXmlTag.valueOf(qName.toUpperCase().replace(REPLACE_THIS, REPLACE_ON));
+                if (withText.contains(temp)) {
+                    currentXmlTag = temp;
+                }
             }
         }
     }
@@ -67,15 +74,15 @@ public class FlowerHandler extends DefaultHandler {
         String data = new String(ch, start, length).strip();
         if (currentXmlTag != null) {
             switch (currentXmlTag) {
-                case SOIL -> current.setSoil(Soil.valueOf(data));
+                case SOIL -> current.setSoil(Soil.valueOf(data.toUpperCase().replace(REPLACE_THIS, REPLACE_ON)));
                 case ORIGIN -> current.setOrigin(data);
                 case STEAM_COLOR -> current.getVisualParameters().setSteamColor(data);
                 case LEAF_COLOR -> current.getVisualParameters().setLeafColor(data);
                 case SIZE -> current.getVisualParameters().setSize(data);
-                case MULTIPLYING -> current.setMultiplying(Multiplying.valueOf(data));
+                case MULTIPLYING -> current.setMultiplying(Multiplying.valueOf(data.toUpperCase()));
                 case DATE_OF_PLANTING -> current.setDateOfPlanting(LocalDate.parse(data));
                 case TEMPERATURE -> current.getGrowingTips().setTemperature(data);
-                case LIGHTNING -> current.getGrowingTips().setLighting(Lighting.valueOf(data));
+                case LIGHTNING -> current.getGrowingTips().setLighting(Lightning.valueOf(data.toUpperCase().replace(REPLACE_THIS, REPLACE_ON)));
                 case WATERING -> current.getGrowingTips().setWatering(data);
                 default -> throw new EnumConstantNotPresentException(currentXmlTag.getDeclaringClass(), currentXmlTag.name());
             }

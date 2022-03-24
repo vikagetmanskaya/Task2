@@ -1,6 +1,6 @@
 package by.javacourse.task2.exception;
 
-public class FlowerException extends Exception{
+public class FlowerException extends Exception {
     public FlowerException() {
     }
 

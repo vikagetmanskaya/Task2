@@ -3,12 +3,12 @@
          xmlns="http://www.example.com/flowers"
          xsi:schemaLocation="http://www.example.com/flowers flowers.xsd">
 
-    <flower name="chamomile" id="a1">
+    <flower name="" type-of-flower = "field"
         <soil>ground</soil>
         <origin>Altai</origin>
         <visual-parameters>
-            <steam-color>green</steam-color>
             <leaf-color>white</leaf-color>
+            <steam-color>green</steam-color>
             <size>0.2 m</size>
         </visual-parameters>
         <multiplying>seeds</multiplying>
@@ -16,7 +16,7 @@
         <growing-tips>
             <temperature>20 degree</temperature>
             <lightning>light-loving</lightning>
-            <watering>200 ml</watering>
+            <watering>1000 ml</watering>
         </growing-tips>
     </flower>
     <tree id="a2" name="eucalyptus" max-age = "100">
@@ -35,20 +35,4 @@
             <watering>1000000 ml</watering>
         </growing-tips>
     </tree>
-    <bush id="a3" name="jasmine" amount-of-trunks ="10">
-        <soil>sod-podzolic</soil>
-        <origin>Arabia</origin>
-        <visual-parameters>
-            <steam-color>green</steam-color>
-            <leaf-color>green</leaf-color>
-            <size>3 m</size>
-        </visual-parameters>
-        <multiplying>cutting</multiplying>
-        <date-of-planting>2021-10-01</date-of-planting>
-        <growing-tips>
-            <temperature>23 degree</temperature>
-            <lightning>not-light-loving</lightning>
-            <watering>10000 ml</watering>
-        </growing-tips>
-    </bush>
 </flowers>

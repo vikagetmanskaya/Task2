@@ -3,7 +3,7 @@
          xmlns="http://www.example.com/flowers"
          xsi:schemaLocation="http://www.example.com/flowers flowers.xsd">
 
-    <flower name="chamomile" id="a1">
+    <flower id="a1" name="chamomile" type-of-flower="field">
         <soil>ground</soil>
         <origin>Altai</origin>
         <visual-parameters>

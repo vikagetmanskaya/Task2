@@ -37,4 +37,30 @@ public class VisualParameters {
     public void setSize(String size) {
         this.size = size;
     }
+
+    @Override
+    public int hashCode() {
+        int result = steamColor == null ? 0 : steamColor.hashCode();
+        result = 31 * result + (leafColor == null ? 0 : leafColor.hashCode());
+        result = 31 * result + (size == null ? 0 : size.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        VisualParameters visualParameters = (VisualParameters) obj;
+
+        return steamColor.equals(visualParameters.steamColor) && leafColor.equals(visualParameters.leafColor) && size.equals(visualParameters.size);
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("steam color = ").append(steamColor).append(" ");
+        stringBuilder.append("leaf color = ").append(leafColor).append(" ");
+        stringBuilder.append("size = ").append(size).append(" ");
+        return stringBuilder.toString();
+
+    }
 }

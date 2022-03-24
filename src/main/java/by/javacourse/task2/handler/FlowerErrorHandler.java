@@ -7,7 +7,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 public class FlowerErrorHandler implements ErrorHandler {
-    private static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
+
     @Override
     public void warning(SAXParseException e) throws SAXException {
         logger.warn(getLineColumnNumber(e) + " - " + e.getMessage());
@@ -22,7 +23,8 @@ public class FlowerErrorHandler implements ErrorHandler {
     public void fatalError(SAXParseException e) throws SAXException {
         logger.fatal(getLineColumnNumber(e) + " - " + e.getMessage());
     }
-    private String getLineColumnNumber(SAXParseException e){
+
+    private String getLineColumnNumber(SAXParseException e) {
         return e.getLineNumber() + " : " + e.getColumnNumber();
     }
 }

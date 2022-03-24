@@ -15,21 +15,31 @@ import java.io.File;
 import java.io.IOException;
 
 public class FlowerXMLValidator {
-    private static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
+    private static FlowerXMLValidator instance;
 
-    public boolean validateXML(String fileName) {
+    private FlowerXMLValidator() {
+    }
+
+    public static FlowerXMLValidator getInstance() {
+        if (instance == null) {
+            instance = new FlowerXMLValidator();
+        }
+        return instance;
+    }
+
+    public boolean validateXML(String fileXmlName, String fileXsdName) {
         String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
-        String schemaName = "src/main/resources/data/flowers.xsd";
         SchemaFactory factory = SchemaFactory.newInstance(language);
-        File schemaLocation = new File(schemaName);
+        File schemaLocation = new File(fileXsdName);
         try {
             Schema schema = factory.newSchema(schemaLocation);
             Validator validator = schema.newValidator();
-            Source source = new StreamSource(fileName);
+            Source source = new StreamSource(fileXmlName);
             validator.setErrorHandler(new FlowerErrorHandler());
             validator.validate(source);
         } catch (SAXException | IOException e) {
-            logger.error(fileName + " is not correct or valid " + e);
+            logger.error(fileXmlName + " is not correct or valid " + e);
             return false;
         }
         return true;

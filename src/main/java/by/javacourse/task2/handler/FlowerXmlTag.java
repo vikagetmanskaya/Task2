@@ -7,21 +7,21 @@ public enum FlowerXmlTag {
     BUSH("bush"),
     ID("id"),
     NAME("name"),
-    TYPE_OF_FLOWER("typeOfFlower"),
+    TYPE_OF_FLOWER("type-of-flower"),
     SOIL("soil"),
     ORIGIN("origin"),
-    VISUAL_PARAMETERS("visual-parameters"),
     STEAM_COLOR("steam-color"),
     LEAF_COLOR("leaf-color"),
     SIZE("size"),
     MULTIPLYING("multiplying"),
     DATE_OF_PLANTING("date-of-planting"),
-    GROWING_TIPS("growing-tips"),
     TEMPERATURE("temperature"),
     LIGHTNING("lightning"),
     WATERING("watering"),
     MAX_AGE("max-age"),
-    AMOUNT_OF_TRUNKS("amount-of-trunks");
+    AMOUNT_OF_TRUNKS("amount-of-trunks"),
+    VISUAL_PARAMETERS("visual-parameters"),
+    GROWING_TIPS("growing-tips");
     private String value;
 
     FlowerXmlTag(String value) {

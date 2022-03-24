@@ -1,11 +1,12 @@
 package by.javacourse.task2.entity;
 
-public enum FlowerType {
-    FIELD("field"),
-    DECORATIVE("decorative");
+public enum Lightning {
+    LIGHT_LOVING("light_loving"),
+    NOT_LIGHT_LOVING("not_light_loving");
+
     private String value;
 
-    FlowerType(String value) {
+    Lightning(String value) {
         this.value = value;
     }
 
